@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bałagan.cc — klub kolarski</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --pink: #F04EAE;
+      --pink-light: #fce8f4;
+      --black: #0e0e0e;
+      --off-white: #f7f5f2;
+      --muted: #6b6662;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--off-white);
+      color: var(--black);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: rgba(247, 245, 242, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--black);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 4rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg-circle {
+      position: absolute;
+      top: -120px;
+      right: -80px;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: var(--pink-light);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      max-width: 800px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--pink);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 420px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--black);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.85rem 2rem;
+      border-radius: 100px;
+      transition: background 0.2s, transform 0.15s;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-primary:hover {
+      background: var(--pink);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--black);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.85rem 2rem;
+      border-radius: 100px;
+      border: 1.5px solid rgba(0, 0, 0, 0.15);
+      transition: border-color 0.2s, color 0.2s;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--pink);
+      color: var(--pink);
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* STATS */
+    .stats-strip {
+      background: var(--black);
+      padding: 2.5rem 4rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.8rem;
+      color: #fff;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .stat-num span {
+      color: var(--pink);
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.45);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 6px;
+    }
+
+    /* SECTION */
+    section {
+      padding: 7rem 4rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--pink);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      max-width: 520px;
+    }
+
+    /* ABOUT */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .about-text {
+      max-width: 480px;
+    }
+
+    .about-text p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-top: 1.5rem;
+      font-weight: 300;
+    }
+
+    .about-slideshow {
+      position: relative;
+      aspect-ratio: 1/1;
+      border-radius: 4px;
+      overflow: hidden;
+      max-width: 800px;
+    }
+
+    .about-slideshow img,
+    .about-slideshow video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    .about-slideshow img.active,
+    .about-slideshow video.active {
+      opacity: 1;
+    }
+
+    .slideshow-dots {
+      position: absolute;
+      bottom: 1.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 2;
+    }
+
+    .slideshow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.45);
+      transition: background 0.3s;
+    }
+
+    .slideshow-dot.active {
+      background: #fff;
+    }
+
+    /* RIDES */
+    .rides-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .ride-card {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 4px;
+      padding: 2rem;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .ride-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--pink);
+    }
+
+    .ride-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 4px 10px;
+      border-radius: 100px;
+      margin-bottom: 1.2rem;
+      font-weight: 500;
+    }
+
+    .badge-easy {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .badge-medium {
+      background: #fff8e1;
+      color: #f57f17;
+    }
+
+    .badge-hard {
+      background: #fce4ec;
+      color: #c62828;
+    }
+
+    .ride-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--black);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .ride-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+
+    .ride-meta {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .ride-meta-item {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .ride-meta-item strong {
+      display: block;
+      font-size: 1rem;
+      color: var(--black);
+      font-weight: 500;
+    }
+
+    /* JOIN */
+    .join-section {
+      background: var(--black);
+      color: #fff;
+    }
+
+    .join-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .join-section .section-title {
+      color: #fff;
+      max-width: 440px;
+    }
+
+    .join-section .section-title em {
+      font-style: italic;
+      color: var(--pink);
+    }
+
+    .join-form {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .join-form input {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      padding: 0.8rem 1.2rem;
+      border-radius: 100px;
+      outline: none;
+      width: 240px;
+      transition: border-color 0.2s;
+    }
+
+    .join-form input::placeholder {
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .join-form input:focus {
+      border-color: var(--pink);
+    }
+
+    .btn-pink {
+      background: var(--pink);
+      color: #fff;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.8rem 1.8rem;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-pink:hover {
+      opacity: 0.85;
+      transform: translateY(-1px);
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--pink);
+    }
+
+    /* ANIM */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-up {
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    .delay-1 {
+      animation-delay: 0.15s;
+    }
+
+    .delay-2 {
+      animation-delay: 0.3s;
+    }
+
+    .delay-3 {
+      animation-delay: 0.45s;
+    }
+
+    .delay-4 {
+      animation-delay: 0.6s;
+    }
+
+    @media (max-width: 900px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 8rem 1.5rem 4rem;
+      }
+
+      .stats-strip {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 2rem 1.5rem;
+      }
+
+      section {
+        padding: 5rem 1.5rem;
+      }
+
+      .about {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .rides-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .join-inner {
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+
+      footer {
+        padding: 1.5rem;
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="logo.webp" alt="bałagan.cc" style="height: 60px; width: auto;">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#o-nas">O nas</a></li>
+      <li><a href="#trasy">Trasy</a></li>
+      <li><a href="#dolacz">Dołącz</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg-circle"></div>
+    <p class="hero-eyebrow fade-up">Wrocław · od 2026</p>
+    <h1 class="hero-title fade-up delay-1">Jeździmy razem.<br><em>Zawsze.</em></h1>
+    <p class="hero-sub fade-up delay-2">Klub kolarski bez sztywnych zasad. Nieważne, czy zaczynasz, czy masz setki
+      tysięcy km w nogach — tu jesteś u siebie.</p>
+    <div class="hero-cta fade-up delay-3">
+      <a href="#dolacz" class="btn-primary">Dołącz do nas →</a>
+      <a href="#trasy" class="btn-outline">Zobacz trasy</a>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <div class="stats-strip">
+    <div class="stat-item">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Kolarzy</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3<span>×</span></div>
+      <div class="stat-label">Jazdy w tygodniu</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4<span>k</span></div>
+      <div class="stat-label">km łącznie w 2026</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">0<span>%</span></div>
+      <div class="stat-label">Excuses</div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="o-nas" style="padding: 4rem;">
+    <div class="about">
+      <div class="about-text">
+        <p class="section-label">O nas</p>
+        <h2 class="section-title">Chaos, który działa.</h2>
+        <p>Bałagan to nie tylko nazwa — to filozofia. Spontaniczne jazdy w tygodniu, długie wypady za miasto i trasy,
+          przy których przepisy są tylko sugestią. Jeździmy razem, ale bez taryfy ulgowej.
+          Bez cukru w bidonach nie wyjeżdżamy, a piwo po jeździe jest obowiązkowe.</p>
+      </div>
+      <div class="about-slideshow" id="slideshow">
+        <img src="media/img_1.jpeg" class="active">
+        <img src="media/img_2.jpeg">
+        <img src="media/img_3.jpeg">
+        <video src="media/mov_1.mp4" muted playsinline></video>
+        <video src="media/mov_2.mp4" muted playsinline></video>
+        <video src="media/mov_3.mp4" muted playsinline></video>
+        <video src="media/mov_4.mp4" muted playsinline></video>
+        <video src="media/mov_5.mp4" muted playsinline></video>
+        <video src="media/mov_6.mp4" muted playsinline></video>
+        <div class="slideshow-dots">
+          <div class="slideshow-dot active"></div>
+          <div class="slideshow-dot"></div>
+          <div class="slideshow-dot"></div>
+          <div class="slideshow-dot"></div>
+          <div class="slideshow-dot"></div>
+          <div class="slideshow-dot"></div>
+          <div class="slideshow-dot"></div>
+          <div class="slideshow-dot"></div>
+          <div class="slideshow-dot"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RIDES -->
+  <section id="trasy" style="background: #fff;">
+    <p class="section-label">Trasy</p>
+    <h2 class="section-title">Coś dla każdego.</h2>
+    <div class="rides-grid">
+
+      <div class="ride-card">
+        <span class="ride-badge badge-easy">Spokojnie</span>
+        <div class="ride-name">Środowe poranne</div>
+        <p class="ride-desc">Nieśpieszna pętla po okolicach Wrocławia. Idealna na wejście w tydzień lub powrót po
+          przerwie.</p>
+        <div class="ride-meta">
+          <div class="ride-meta-item"><strong>45–65 km</strong>Dystans</div>
+          <div class="ride-meta-item"><strong>~25 km/h</strong>Tempo</div>
+          <div class="ride-meta-item"><strong>Śr. 7:00</strong>Start</div>
+        </div>
+      </div>
+
+      <div class="ride-card">
+        <span class="ride-badge badge-medium">Dynamicznie</span>
+        <div class="ride-name">Sobotni grupowy</div>
+        <p class="ride-desc">Klasyczny weekendowy wyjazd. Zmienne tempo, wspólne decyzje o trasie i obowiązkowy
+          przystanek kawowy.</p>
+        <div class="ride-meta">
+          <div class="ride-meta-item"><strong>80–120 km</strong>Dystans</div>
+          <div class="ride-meta-item"><strong>~30 km/h</strong>Tempo</div>
+          <div class="ride-meta-item"><strong>Sob. 8:00</strong>Start</div>
+        </div>
+      </div>
+
+      <div class="ride-card">
+        <span class="ride-badge badge-hard">Hardcore</span>
+        <div class="ride-name">Miesięczna wyprawa</div>
+        <p class="ride-desc">Raz w miesiącu ruszamy dalej. Sudety, Beskidy, czasem za granicę. Bez kompromisów co do
+          przewyższeń.</p>
+        <div class="ride-meta">
+          <div class="ride-meta-item"><strong>150–200 km</strong>Dystans</div>
+          <div class="ride-meta-item"><strong>2000+ m</strong>Przewyższenia</div>
+          <div class="ride-meta-item"><strong>Całodniowo</strong>Czas</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- JOIN -->
+  <section id="dolacz" class="join-section">
+    <div class="join-inner">
+      <div>
+        <p class="section-label" style="color: rgba(255,255,255,0.4);">Dołącz</p>
+        <h2 class="section-title">Gotowy na<br><em>bałagan?</em></h2>
+        <p
+          style="font-size: 0.95rem; color: rgba(255,255,255,0.5); margin-top: 1rem; font-weight: 300; max-width: 340px; line-height: 1.7;">
+          Zostaw maila, a odezwiemy się z detalami przed następną jazdą.</p>
+      </div>
+      <div>
+        <div class="join-form">
+          <input type="email" placeholder="twoj@email.com">
+          <button class="btn-pink">Zapisz się</button>
+        </div>
+        <p style="font-size: 0.75rem; color: rgba(255,255,255,0.25); margin-top: 1rem;">Żadnego spamu. Tylko zaproszenia
+          na jazdy.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-copy">© 2026 bałagan.cc</span>
+    <ul class="footer-links">
+      <li><a href="#">Strava</a></li>
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Kontakt</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('#slideshow img, #slideshow video'));
+    const dots = Array.from(document.querySelectorAll('.slideshow-dot'));
+    let cur = 0;
+    let timer;
+
+    function goTo(n) {
+      const prev = slides[cur];
+      prev.classList.remove('active');
+      if (prev.tagName === 'VIDEO') { prev.pause(); prev.currentTime = 0; prev.onended = null; }
+      if (dots[cur]) dots[cur].classList.remove('active');
+
+      cur = (n + slides.length) % slides.length;
+
+      const next = slides[cur];
+      next.classList.add('active');
+      if (dots[cur]) dots[cur].classList.add('active');
+
+      clearInterval(timer);
+      if (next.tagName === 'VIDEO') {
+        const playPromise = next.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => { startTimer(); });
+        }
+        next.onended = () => { goTo(cur + 1); };
+        // fallback: jeśli film nie skończy się w 30s, idź dalej
+        timer = setTimeout(() => goTo(cur + 1), 30000);
+      } else {
+        startTimer();
+      }
+    }
+
+    function startTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => goTo(cur + 1), 5000);
+    }
+
+    startTimer();
+  </script>
+
+</body>
+
+
+</html>
